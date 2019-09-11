@@ -1,6 +1,4 @@
-package br.com.bluesoft.streamprocessor;
-
-import br.com.bluesoft.streamprocessor.instruction.Instruction;
+package br.com.bluesoft.streamprocessor.instruction;
 
 public abstract class TypedInstruction<T> extends Instruction {
 
