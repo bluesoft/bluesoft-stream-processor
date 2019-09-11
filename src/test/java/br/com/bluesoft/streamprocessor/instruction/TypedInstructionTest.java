@@ -1,8 +1,8 @@
-package br.com.bluesoft.streamprocessor;
+package br.com.bluesoft.streamprocessor.instruction;
 
 import org.junit.Test;
 
-import br.com.bluesoft.streamprocessor.instruction.TypedInstruction;
+import br.com.bluesoft.streamprocessor.Data;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
