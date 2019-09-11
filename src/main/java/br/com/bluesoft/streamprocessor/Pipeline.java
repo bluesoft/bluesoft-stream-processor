@@ -64,7 +64,6 @@ public class Pipeline {
         @Override
         public void handle(Object object) {
             instruction.handle(object);
-            handleNext(object);
         }
 
         @Override

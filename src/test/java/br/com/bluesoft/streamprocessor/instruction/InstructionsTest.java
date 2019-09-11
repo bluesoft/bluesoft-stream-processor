@@ -2,33 +2,46 @@ package br.com.bluesoft.streamprocessor.instruction;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import br.com.bluesoft.streamprocessor.Data;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class InstructionsTest {
 
     @Test
     public void criaChain() {
         // Arranje
-        Instruction instruction1 = mock(Instruction.class);
-        Instruction instruction2 = mock(Instruction.class);
-
-        List<Instruction> instructions = Arrays.asList(instruction1, instruction2);
+        InstructionStub instruction1 = new InstructionStub();
+        InstructionStub instruction2 = new InstructionStub();
+        Object object = new Object();
 
         // Act
-        Instruction chain = Instructions.chain(instructions);
+        Instruction chain = Instructions.chain(instruction1, instruction2);
+        chain.handle(object);
 
         // Assert
         assertEquals(chain, instruction1);
-
-        verify(instruction1).setChain(instruction1);
-        verify(instruction2).setChain(instruction1);
-
-        verify(instruction1).setNext(instruction2);
+        assertEquals(object, instruction1.getHandleParam());
+        assertEquals(object, instruction2.getHandleParam());
     }
 
+    private static class InstructionStub extends Instruction {
+
+        private Object handleParam;
+
+        @Override
+        public void handle(Object object) {
+            handleParam = object;
+            handleNext(object);
+        }
+
+        @Override
+        public Data collect(Data data) {
+            throw new UnsupportedOperationException();
+        }
+
+        public Object getHandleParam() {
+            return handleParam;
+        }
+    }
 }

@@ -28,8 +28,8 @@ public class InstructionTest {
         instruction1.handleNext(registro);
 
         // Assert
-        assertEquals(instruction1.getHandleNextParam(), registro);
-        assertEquals(instruction2.getHandleParam(), registro);
+        assertEquals(registro, instruction1.getHandleNextParam());
+        assertEquals(registro, instruction2.getHandleParam());
     }
 
     @Test
@@ -94,8 +94,8 @@ public class InstructionTest {
 
         @Override
         protected void handleNext(Object object) {
-            super.handleNext(object);
             handleNextParam = object;
+            super.handleNext(object);
         }
 
         @Override

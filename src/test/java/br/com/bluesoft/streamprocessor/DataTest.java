@@ -4,6 +4,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -13,7 +15,7 @@ public class DataTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
-    public void getSemObjetoColetado() {
+    public void getNothing() {
         // Arrange
         Data data = new Data();
 
@@ -25,7 +27,7 @@ public class DataTest {
     }
 
     @Test
-    public void getComUmObjetoColetado() {
+    public void getObject() {
         // Arrange
         Data data = new Data();
         Object object = new Object();
@@ -39,7 +41,7 @@ public class DataTest {
     }
 
     @Test
-    public void getComMaisDeUmObjetoColetado() {
+    public void getCannotReturnMoreThanOne() {
         // Arrange
         Data data = new Data();
         data.add(new Object());
@@ -47,10 +49,39 @@ public class DataTest {
 
         // Assert
         expectedException.expect(IllegalArgumentException.class);
-        expectedException.expectMessage("Utilize o método getList. Existem 2 objetos para o tipo " + Object.class);
+        expectedException.expectMessage("Use getList instead. There are 2 objects of type " + Object.class);
 
         // Act
         Object element = data.get(Object.class);
 
+    }
+
+    @Test
+    public void getAll() {
+        // Arrange
+        Data data = new Data();
+        data.add(new Object());
+        data.add(new Object());
+
+        // Act
+        Collection<Object> objects = data.getAll();
+
+        // Assert
+        assertEquals(2, objects.size());
+    }
+
+    @Test
+    public void getList() {
+        // Arrange
+        Data data = new Data();
+        data.add(new Object());
+        data.add(new Object());
+        data.add("");
+
+        // Act
+        Collection<Object> objects = data.getList(Object.class);
+
+        // Assert
+        assertEquals(2, objects.size());
     }
 }

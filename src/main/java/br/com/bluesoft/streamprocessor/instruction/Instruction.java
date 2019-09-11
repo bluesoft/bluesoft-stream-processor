@@ -11,26 +11,25 @@ public abstract class Instruction {
     private Instruction chain;
     private Instruction next;
 
-    void setChain(Instruction chain) {
-        this.chain = chain;
-    }
-
-    protected void collectAll() {
-        requireChain();
-
-        collectNext(chain, new Data());
-    }
-
     protected void handleNext(Object object) {
         getNext().ifPresent(instruction -> instruction.handle(object));
     }
 
-    protected Optional<Instruction> getNext() {
-        return Optional.ofNullable(next);
+    protected void collectAll() {
+        requireChain();
+        collectNext(chain, new Data());
+    }
+
+    void setChain(Instruction chain) {
+        this.chain = chain;
     }
 
     void setNext(Instruction next) {
         this.next = next;
+    }
+
+    private Optional<Instruction> getNext() {
+        return Optional.ofNullable(next);
     }
 
     private void collectNext(Data data) {

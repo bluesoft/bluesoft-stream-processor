@@ -30,7 +30,7 @@ public class Data {
         if(CollectionUtils.isEmpty(objects)) {
             return null;
         } else if(objects.size() > 1) {
-            String msg = String.format("Utilize o método getList. Existem %d objetos para o tipo %s",
+            String msg = String.format("Use getList instead. There are %d objects of type %s",
                                        objects.size(),
                                        key);
             throw new IllegalArgumentException(msg);
