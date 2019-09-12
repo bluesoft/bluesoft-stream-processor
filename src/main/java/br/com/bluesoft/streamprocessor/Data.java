@@ -15,7 +15,9 @@ public class Data {
     private final Map<Object, List<Object>> dataMap = new LinkedHashMap<>();
 
     public void add(Object object) {
-        put(object.getClass(), object);
+        if(object != null) {
+            put(object.getClass(), object);
+        }
     }
 
     public void addAll(Collection<Object> objects) {

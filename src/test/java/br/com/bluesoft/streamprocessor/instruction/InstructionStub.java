@@ -7,6 +7,7 @@ public class InstructionStub extends Instruction {
     private Object handleNextParam;
     private Object handleParam;
     private Data collectParam;
+    private boolean clear;
 
     @Override
     protected void handleNext(Object object) {
@@ -23,7 +24,13 @@ public class InstructionStub extends Instruction {
     @Override
     public void collect(Data data) {
         collectParam = data;
+        data.add(handleParam);
         collectNext(data);
+    }
+
+    @Override
+    public void clear() {
+        clear = true;
     }
 
     public Object getHandleNextParam() {
@@ -36,5 +43,9 @@ public class InstructionStub extends Instruction {
 
     public Data getCollectParam() {
         return collectParam;
+    }
+
+    public boolean isClear() {
+        return clear;
     }
 }

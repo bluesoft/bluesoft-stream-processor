@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Collection;
 import java.util.Optional;
 
-import br.com.bluesoft.streamprocessor.instruction.Instruction;
+import br.com.bluesoft.streamprocessor.instruction.InstructionStub;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,22 +24,5 @@ public class PipelineTest {
         Collection<Object> collected = data.get().getAll();
         assertEquals(1, collected.size());
         assertEquals(object, collected.iterator().next());
-    }
-
-    private static class InstructionStub extends Instruction {
-
-        private Object object;
-
-        @Override
-        public void handle(Object object) {
-            this.object = object;
-            handleNext(object);
-        }
-
-        @Override
-        public void collect(Data data) {
-            data.add(object);
-            collectNext(data);
-        }
     }
 }

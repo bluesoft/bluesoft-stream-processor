@@ -50,6 +50,10 @@ public class Pipeline {
         public void collect(Data data) {
             collector.accept(data);
         }
+
+        @Override
+        public void clear() {
+        }
     }
 
     private static class Pipe extends Instruction {
@@ -67,6 +71,11 @@ public class Pipeline {
 
         @Override
         public void collect(Data data) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void clear() {
             throw new UnsupportedOperationException();
         }
     }

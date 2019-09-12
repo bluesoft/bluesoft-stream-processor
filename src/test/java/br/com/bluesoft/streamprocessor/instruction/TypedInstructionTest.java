@@ -52,6 +52,11 @@ public class TypedInstructionTest {
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public void clear() {
+            throw new UnsupportedOperationException();
+        }
+
         public String getHandleTypedParam() {
             return handleTypedParam;
         }

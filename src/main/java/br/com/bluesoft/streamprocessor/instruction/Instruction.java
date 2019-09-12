@@ -9,6 +9,10 @@ public abstract class Instruction {
     private Instruction chain;
     private Instruction next;
 
+    void setChain(Instruction chain) {
+        this.chain = chain;
+    }
+
     protected void handleNext(Object object) {
         getNext().ifPresent(instruction -> instruction.handle(object));
     }
@@ -18,12 +22,18 @@ public abstract class Instruction {
         chain.collect(new Data());
     }
 
+    protected void clearAll() {
+        requireChain();
+        clearNext(chain);
+    }
+
     protected void collectNext(Data data) {
         getNext().ifPresent(instruction -> instruction.collect(data));
     }
 
-    void setChain(Instruction chain) {
-        this.chain = chain;
+    private void clearNext(Instruction instruction) {
+        instruction.clear();
+        getNext().ifPresent(this::clearNext);
     }
 
     private Optional<Instruction> getNext() {
@@ -44,4 +54,6 @@ public abstract class Instruction {
     public abstract void handle(Object object);
 
     public abstract void collect(Data data);
+
+    public abstract void clear();
 }

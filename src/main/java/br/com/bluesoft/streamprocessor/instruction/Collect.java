@@ -21,4 +21,8 @@ public class Collect extends Instruction {
     public void collect(Data data) {
         collectNext(mapper.apply(data));
     }
+
+    @Override
+    public void clear() {
+    }
 }
