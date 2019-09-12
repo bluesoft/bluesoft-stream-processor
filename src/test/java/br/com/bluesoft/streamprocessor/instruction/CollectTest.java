@@ -12,16 +12,36 @@ import static org.junit.Assert.assertTrue;
 public class CollectTest {
 
     @Test
-    public void mapOnCollect() {
+    public void collectNext() {
         // Arranje
-        Data expectedData = new Data();
-        Collect collect = new Collect(d -> expectedData);
+        InstructionStub nextInstruction = new InstructionStub();
+
+        Collect collect = new Collect(data -> data);
+        collect.setNext(nextInstruction);
+
+        Data data = new Data();
 
         // Act
-        Data dataCollected = collect.collect(new Data());
+        collect.collect(data);
 
         // Assert
-        assertEquals(expectedData, dataCollected);
+        assertEquals(data, nextInstruction.getCollectParam());
+    }
+
+    @Test
+    public void mapOnCollect() {
+        // Arranje
+        AtomicBoolean collected = new AtomicBoolean();
+        Collect collect = new Collect(d -> {
+            collected.set(true);
+            return d;
+        });
+
+        // Act
+        collect.collect(new Data());
+
+        // Assert
+        assertTrue(collected.get());
     }
 
     @Test
@@ -40,5 +60,24 @@ public class CollectTest {
 
         // Assert
         assertTrue(collected.get());
+    }
+
+    private static class InstructionStub extends Instruction {
+
+        private Data collectParam;
+
+        @Override
+        public void handle(Object object) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void collect(Data data) {
+            this.collectParam = data;
+        }
+
+        public Data getCollectParam() {
+            return collectParam;
+        }
     }
 }

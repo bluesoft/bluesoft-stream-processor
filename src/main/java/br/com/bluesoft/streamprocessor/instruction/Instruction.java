@@ -1,7 +1,5 @@
 package br.com.bluesoft.streamprocessor.instruction;
 
-import org.apache.commons.lang3.Validate;
-
 import java.util.Optional;
 
 import br.com.bluesoft.streamprocessor.Data;
@@ -17,31 +15,23 @@ public abstract class Instruction {
 
     protected void collectAll() {
         requireChain();
-        collectNext(chain, new Data());
+        chain.collect(new Data());
+    }
+
+    protected void collectNext(Data data) {
+        getNext().ifPresent(instruction -> instruction.collect(data));
     }
 
     void setChain(Instruction chain) {
         this.chain = chain;
     }
 
-    void setNext(Instruction next) {
-        this.next = next;
-    }
-
     private Optional<Instruction> getNext() {
         return Optional.ofNullable(next);
     }
 
-    private void collectNext(Data data) {
-        getNext().ifPresent(instruction -> collectNext(instruction, data));
-    }
-
-    private void collectNext(Instruction instruction,
-                             Data data) {
-
-        data = instruction.collect(data);
-        Validate.notNull(data, "Collected data cannot be null");
-        instruction.collectNext(data);
+    void setNext(Instruction next) {
+        this.next = next;
     }
 
     private void requireChain() {
@@ -53,5 +43,5 @@ public abstract class Instruction {
 
     public abstract void handle(Object object);
 
-    public abstract Data collect(Data data);
+    public abstract void collect(Data data);
 }

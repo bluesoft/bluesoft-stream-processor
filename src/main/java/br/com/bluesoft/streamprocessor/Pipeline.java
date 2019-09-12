@@ -47,9 +47,8 @@ public class Pipeline {
         }
 
         @Override
-        public Data collect(Data data) {
+        public void collect(Data data) {
             collector.accept(data);
-            return data;
         }
     }
 
@@ -67,7 +66,7 @@ public class Pipeline {
         }
 
         @Override
-        public Data collect(Data data) {
+        public void collect(Data data) {
             throw new UnsupportedOperationException();
         }
     }

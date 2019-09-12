@@ -37,9 +37,9 @@ public class PipelineTest {
         }
 
         @Override
-        public Data collect(Data data) {
+        public void collect(Data data) {
             data.add(object);
-            return data;
+            collectNext(data);
         }
     }
 }

@@ -19,7 +19,7 @@ public class TypedInstructionTest {
         instruction.handle(expected);
 
         // Assert
-        assertEquals(expected, instruction.getString());
+        assertEquals(expected, instruction.getHandleTypedParam());
     }
 
     @Test
@@ -31,12 +31,12 @@ public class TypedInstructionTest {
         instruction.handle(new Object());
 
         // Assert
-        assertNull(instruction.getString());
+        assertNull(instruction.getHandleTypedParam());
     }
 
     public static class TypedInstructionStub extends TypedInstruction<String> {
 
-        private String string;
+        private String handleTypedParam;
 
         public TypedInstructionStub(Class<String> type) {
             super(type);
@@ -44,16 +44,16 @@ public class TypedInstructionTest {
 
         @Override
         protected void handleTyped(String string) {
-            this.string = string;
+            this.handleTypedParam = string;
         }
 
         @Override
-        public Data collect(Data data) {
+        public void collect(Data data) {
             throw new UnsupportedOperationException();
         }
 
-        public String getString() {
-            return string;
+        public String getHandleTypedParam() {
+            return handleTypedParam;
         }
     }
 }

@@ -19,58 +19,34 @@ public class InstructionTest {
         // Arranje
         Long registro = 1L;
 
-        InstructionStub instruction2 = new InstructionStub();
+        InstructionStub lastInstruction = new InstructionStub();
 
-        InstructionStub instruction1 = new InstructionStub();
-        instruction1.setNext(instruction2);
+        InstructionStub firstInstruction = new InstructionStub();
+        firstInstruction.setNext(lastInstruction);
 
         // Act
-        instruction1.handleNext(registro);
+        firstInstruction.handleNext(registro);
 
         // Assert
-        assertEquals(registro, instruction1.getHandleNextParam());
-        assertEquals(registro, instruction2.getHandleParam());
+        assertEquals(registro, firstInstruction.getHandleNextParam());
+        assertEquals(registro, lastInstruction.getHandleParam());
     }
 
     @Test
     public void collectAll() {
         // Arranje
-        InstructionStub instruction2 = new InstructionStub();
+        InstructionStub lastInstruction = new InstructionStub();
 
-        InstructionStub instruction1 = new InstructionStub();
-        instruction1.setNext(instruction2);
+        InstructionStub firstInstruction = new InstructionStub();
+        firstInstruction.setNext(lastInstruction);
 
-        instruction2.setChain(instruction1);
-
-        // Act
-        instruction2.collectAll();
-
-        // Assert
-        assertNotNull(instruction1.getCollectParam());
-        assertNotNull(instruction2.getCollectParam());
-    }
-
-    @Test
-    public void onCollectValidateIfReturnsData() {
-        // Arranje
-        InstructionStub instruction2 = new InstructionStub() {
-            @Override
-            public Data collect(Data data) {
-                return null;
-            }
-        };
-
-        InstructionStub instruction1 = new InstructionStub();
-        instruction1.setNext(instruction2);
-
-        instruction2.setChain(instruction1);
-
-        // Assert
-        expectedException.expectMessage("Collected data cannot be null");
-        expectedException.expect(NullPointerException.class);
+        lastInstruction.setChain(firstInstruction);
 
         // Act
-        instruction2.collectAll();
+        lastInstruction.collectAll();
+
+        // Assert
+        assertNotNull(firstInstruction.getCollectParam());
     }
 
     @Test
@@ -104,8 +80,8 @@ public class InstructionTest {
         }
 
         @Override
-        public Data collect(Data data) {
-            return collectParam = data;
+        public void collect(Data data) {
+            collectParam = data;
         }
 
         public Object getHandleNextParam() {

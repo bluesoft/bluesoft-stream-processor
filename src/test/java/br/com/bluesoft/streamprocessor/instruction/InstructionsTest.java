@@ -11,18 +11,18 @@ public class InstructionsTest {
     @Test
     public void criaChain() {
         // Arranje
-        InstructionStub instruction1 = new InstructionStub();
-        InstructionStub instruction2 = new InstructionStub();
+        InstructionStub firstInstruction = new InstructionStub();
+        InstructionStub lasteInstruction = new InstructionStub();
         Object object = new Object();
 
         // Act
-        Instruction chain = Instructions.chain(instruction1, instruction2);
+        Instruction chain = Instructions.chain(firstInstruction, lasteInstruction);
         chain.handle(object);
 
         // Assert
-        assertEquals(chain, instruction1);
-        assertEquals(object, instruction1.getHandleParam());
-        assertEquals(object, instruction2.getHandleParam());
+        assertEquals(chain, firstInstruction);
+        assertEquals(object, firstInstruction.getHandleParam());
+        assertEquals(object, lasteInstruction.getHandleParam());
     }
 
     private static class InstructionStub extends Instruction {
@@ -36,7 +36,7 @@ public class InstructionsTest {
         }
 
         @Override
-        public Data collect(Data data) {
+        public void collect(Data data) {
             throw new UnsupportedOperationException();
         }
 

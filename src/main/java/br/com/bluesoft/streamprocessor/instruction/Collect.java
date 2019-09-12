@@ -18,7 +18,7 @@ public class Collect extends Instruction {
     }
 
     @Override
-    public Data collect(Data data) {
-        return mapper.apply(data);
+    public void collect(Data data) {
+        collectNext(mapper.apply(data));
     }
 }
