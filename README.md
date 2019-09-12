@@ -33,21 +33,22 @@ Into samething like this
 
 pipeline
     .pipe(
-        .groupBy(Header.class)
-        .groupBy(Block.class)
-        .join(LineA.class)
-        .join(LineB.class)
-        .when(LineB.class)
-        .collect(data -> {
-            Header header = data.get(Header.class);
-            Block block = data.get(Block.class);
-            List<LineA> as = data.getList(LineA.class);
-            LineB lineB data.get(LineB.class);
-            
-            Pojo pojo = convert(header, block, as, lineB);
-            
-            return new Data(pojo);
-        })
+        Instructions
+            .groupBy(Header.class)
+            .groupBy(Block.class)
+            .join(LineA.class)
+            .join(LineB.class)
+            .when(LineB.class)
+            .collect(data -> {
+                Header header = data.get(Header.class);
+                Block block = data.get(Block.class);
+                List<LineA> as = data.getList(LineA.class);
+                LineB lineB data.get(LineB.class);
+
+                Pojo pojo = convert(header, block, as, lineB);
+
+                return new Data(pojo);
+            })
     )
 ```
 
