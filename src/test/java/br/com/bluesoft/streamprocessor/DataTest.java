@@ -15,6 +15,31 @@ public class DataTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
+    public void addIgnoreNullValues() {
+        // Arranje
+        Data data = new Data();
+
+        // Act
+        data.add(null);
+
+        // Assert
+        assertEquals(0, data.getAll().size());
+    }
+
+    @Test
+    public void addAllIgnoreNullValues() {
+        // Arranje
+        Data data = new Data();
+
+        // Act
+        data.addAll(null);
+
+        // Assert
+        assertEquals(0, data.getAll().size());
+    }
+
+
+    @Test
     public void getNothing() {
         // Arrange
         Data data = new Data();

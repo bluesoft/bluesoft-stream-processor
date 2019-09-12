@@ -6,6 +6,7 @@ import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class InstructionTest {
 
@@ -45,6 +46,24 @@ public class InstructionTest {
 
         // Assert
         assertNotNull(firstInstruction.getCollectParam());
+    }
+
+    @Test
+    public void clearAll() {
+        // Arranje
+        InstructionStub lastInstruction = new InstructionStub();
+
+        InstructionStub firstInstruction = new InstructionStub();
+        firstInstruction.setNext(lastInstruction);
+
+        lastInstruction.setChain(firstInstruction);
+
+        // Act
+        lastInstruction.clearAll();
+
+        // Assert
+        assertTrue(firstInstruction.isClear());
+        assertTrue(lastInstruction.isClear());
     }
 
     @Test
