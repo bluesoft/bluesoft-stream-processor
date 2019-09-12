@@ -52,18 +52,73 @@ pipeline
     )
 ```
 
-# Example
+# Usage
 
 ## Instruction
 
+Each instruction can handle data and have it's data collected and state cleared.
 
 ```java
 
+public class Collect extends Instruction {
 
+    private Function<Data, Data> mapper;
+
+    Collect(Function<Data, Data> mapper) {
+        this.mapper = mapper;
+    }
+
+    @Override
+    public void handle(Object object) {
+        collectAll();
+    }
+
+    @Override
+    public void collect(Data data) {
+        collectNext(mapper.apply(data));
+    }
+
+    @Override
+    public void clear() {
+    }
+}
+```
+
+### Typed instruction
+
+You can have an instruction that only handle a especific type
+
+```java
+public class Join extends TypedInstruction<Record> {
+
+    private List<Record> elements = new ArrayList<>();
+
+    public Join(Class<Record> type) {
+        super(type);
+    }
+
+    @Override
+    protected void handleTyped(Record record) {
+        handleNext(record);
+    }
+
+    @Override
+    public void collect(Data data) {
+        data.addAll(elements);
+        collectNext(data);
+    }
+
+    @Override
+    public void clear() {
+        elements.clear();
+    }
+}
 
 ```
 
 ## Pipeline
+
+The pipeline will try to collect data at every call to the handle method
 
 ```java
 
