@@ -59,7 +59,7 @@ pipeline
 
 ## Instruction
 
-Each instruction can handle data and have it's data collected and state cleared.
+Each instruction can handle data and can have it's data collected and state cleared.
 
 ```java
 
