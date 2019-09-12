@@ -63,17 +63,16 @@ Each instruction can handle data and can have it's data collected and state clea
 
 ```java
 
-public class Collect extends Instruction {
+public class Map extends Instruction {
 
     private Function<Data, Data> mapper;
 
-    Collect(Function<Data, Data> mapper) {
+    Map(Function<Data, Data> mapper) {
         this.mapper = mapper;
     }
 
     @Override
-    public void handle(Object object) {
-        collectAll();
+    public void handle(Object object) {        
     }
 
     @Override
