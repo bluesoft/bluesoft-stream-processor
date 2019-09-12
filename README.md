@@ -28,7 +28,7 @@ for (Object line : lines) {
     }
 }
 ```
-Into samething like this
+Into something like this
 ```java
 
 pipeline
