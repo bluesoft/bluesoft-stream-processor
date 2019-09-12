@@ -72,7 +72,8 @@ public class Map extends Instruction {
     }
 
     @Override
-    public void handle(Object object) {        
+    public void handle(Object object) {
+        handleNext(object);
     }
 
     @Override
