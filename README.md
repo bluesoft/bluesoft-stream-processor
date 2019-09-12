@@ -48,9 +48,9 @@ pipeline
                 List<LineA> as = data.getList(LineA.class);
                 LineB lineB data.get(LineB.class);
 
-                Pojo pojo = convert(header, block, as, lineB);
+                Object object = convert(header, block, as, lineB);
 
-                return new Data(pojo);
+                return new Data(object);
             })
     )
 ```
