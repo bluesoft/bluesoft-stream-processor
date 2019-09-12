@@ -20,7 +20,7 @@ public class Data {
         }
     }
 
-    public void addAll(Collection<Object> objects) {
+    public void addAll(Collection<?> objects) {
         if (objects != null) {
             objects.forEach(this::add);
         }
