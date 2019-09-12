@@ -4,8 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import br.com.bluesoft.streamprocessor.Data;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -60,40 +58,5 @@ public class InstructionTest {
 
         // Act
         instruction.collectAll();
-    }
-
-    private static class InstructionStub extends Instruction {
-
-        private Object handleNextParam;
-        private Object handleParam;
-        private Data collectParam;
-
-        @Override
-        protected void handleNext(Object object) {
-            handleNextParam = object;
-            super.handleNext(object);
-        }
-
-        @Override
-        public void handle(Object object) {
-            handleParam = object;
-        }
-
-        @Override
-        public void collect(Data data) {
-            collectParam = data;
-        }
-
-        public Object getHandleNextParam() {
-            return handleNextParam;
-        }
-
-        public Object getHandleParam() {
-            return handleParam;
-        }
-
-        public Data getCollectParam() {
-            return collectParam;
-        }
     }
 }

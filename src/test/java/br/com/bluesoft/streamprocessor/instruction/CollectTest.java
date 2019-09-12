@@ -61,23 +61,4 @@ public class CollectTest {
         // Assert
         assertTrue(collected.get());
     }
-
-    private static class InstructionStub extends Instruction {
-
-        private Data collectParam;
-
-        @Override
-        public void handle(Object object) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void collect(Data data) {
-            this.collectParam = data;
-        }
-
-        public Data getCollectParam() {
-            return collectParam;
-        }
-    }
 }
