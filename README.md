@@ -37,6 +37,7 @@ pipeline
         .groupBy(Block.class)
         .join(LineA.class)
         .join(LineB.class)
+        .when(LineB.class)
         .collect(data -> {
             Header header = data.get(Header.class);
             Block block = data.get(Block.class);
