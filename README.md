@@ -12,7 +12,8 @@ The main reason behind this framework is to abstract this kind of structure
 
 Header header;
 Block block;
-List<LineA> as;
+List<LineA> as = new ArrayList();
+List<Object> objects = new ArrayList();
 
 for (Object line : lines) {
     if (isHeader(line)) {
@@ -22,8 +23,10 @@ for (Object line : lines) {
     } else if (isLineA(line)) {
         as.add((LineA)line);
     } else if (isLineB(line)) {
-        LineB lineB = line;
-        Pojo pojo = convert(header, block, as, lineB);
+        LineB lineB = (LineB)line;
+        
+        objects.add(convert(header, block, as, lineB));
+        
         as.clear();
     }
 }
