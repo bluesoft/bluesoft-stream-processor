@@ -8,10 +8,12 @@ A pipeline of instructions that can be used to process a stream of data.
 
 ```java
 
-Strem.of(...)
-  .flatMap(o -> {
-  Data data = pipeline.handle(o);
-return   data.getAll().stream;
-  })
-
+stream
+    .flatMap(o -> {
+        Optional<Data> data = pipeline.handle(o);
+        return (data.isPresent())
+               ? data.get().getAll().stream()
+               : Stream.empty();
+    });
+    
 ```
