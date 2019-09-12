@@ -2,7 +2,7 @@
 
 A pipeline of instructions that can be used to process a stream of data.
 The pipeline sends the same data throught all pipes which in turn pass data through a chain of instructions.
-Each instruction is reponsible to process the data and decide whether to pass on to the next.
+Each instruction is responsible to process the data and decide whether to pass on to the next.
 
 The main reason behide this framework is to abstract this kind of structure
 ```java
