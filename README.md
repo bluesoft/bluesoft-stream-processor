@@ -10,6 +10,7 @@ The main reason behide this framework is to abstract this kind of structure
 Header header;
 Block block;
 List<LineA> as;
+
 for (Object line : lines) {
     if (isHeader(line)) {
         header = (Header)line;
