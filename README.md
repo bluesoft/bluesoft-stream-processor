@@ -66,11 +66,9 @@ pipeline
 
 ```java
 
-Pipeline pipeline = new Pipeline();
-
-```
-
-```java
+Pipeline pipeline = new Pipeline()
+    .pipe(instructions)
+    .pipe(instructions);
 
 stream
     .flatMap(o -> {
