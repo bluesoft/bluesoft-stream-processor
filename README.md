@@ -39,7 +39,9 @@ pipeline
             Block block = data.get(Block.class);
             List<LineA> as = data.getList(LineA.class);
             LineB lineB data.get(LineB.class);
-            Pojo pojo = process(header, block, as, lineB);
+            
+            Pojo pojo = convert(header, block, as, lineB);
+            
             return new Data(pojo);
         })
     )
