@@ -4,6 +4,8 @@ A pipeline of instructions that can be used to process a stream of data.
 The pipeline sends the same data throught all pipes which in turn pass data through a chain of instructions.
 Each instruction is responsible to process the data and decide whether to pass on to the next.
 
+![alt tag](https://user-images.githubusercontent.com/9370679/64796647-66327f80-d556-11e9-9694-dd26cac77ad8.png)
+
 The main reason behide this framework is to abstract this kind of structure
 ```java
 
@@ -46,8 +48,6 @@ pipeline
         })
     )
 ```
-
-![alt tag](https://user-images.githubusercontent.com/9370679/64796647-66327f80-d556-11e9-9694-dd26cac77ad8.png)
 
 # Example
 
