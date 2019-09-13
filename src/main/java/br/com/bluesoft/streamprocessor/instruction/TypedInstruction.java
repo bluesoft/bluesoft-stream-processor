@@ -12,6 +12,8 @@ public abstract class TypedInstruction<T> extends Instruction {
     public void handle(Object object) {
         if (type.equals(object.getClass())) {
             handleTyped(type.cast(object));
+        } else {
+            handleNext(object);
         }
     }
 

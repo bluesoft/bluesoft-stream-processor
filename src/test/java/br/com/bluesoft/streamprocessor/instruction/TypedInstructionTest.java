@@ -5,7 +5,7 @@ import org.junit.Test;
 import br.com.bluesoft.streamprocessor.Data;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 
 public class TypedInstructionTest {
 
@@ -23,7 +23,7 @@ public class TypedInstructionTest {
     }
 
     @Test
-    public void ignoreNotExpectedType() {
+    public void passOnNotExpectedType() {
         // Arranje
         TypedInstructionStub instruction = new TypedInstructionStub(String.class);
 
@@ -31,15 +31,22 @@ public class TypedInstructionTest {
         instruction.handle(new Object());
 
         // Assert
-        assertNull(instruction.getHandleTypedParam());
+        assertNotNull(instruction.getHandleNextParam());
     }
 
     public static class TypedInstructionStub extends TypedInstruction<String> {
 
         private String handleTypedParam;
+        private Object handleNextParam;
 
         public TypedInstructionStub(Class<String> type) {
             super(type);
+        }
+
+        @Override
+        protected void handleNext(Object object) {
+            this.handleNextParam = object;
+            super.handleNext(object);
         }
 
         @Override
@@ -59,6 +66,10 @@ public class TypedInstructionTest {
 
         public String getHandleTypedParam() {
             return handleTypedParam;
+        }
+
+        public Object getHandleNextParam() {
+            return handleNextParam;
         }
     }
 }
