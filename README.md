@@ -42,7 +42,7 @@ pipeline
             .join(LineA.class)
             .join(LineB.class)
             .when(LineB.class)
-            .collect(data -> {
+            .map(data -> {
                 Header header = data.get(Header.class);
                 Block block = data.get(Block.class);
                 List<LineA> as = data.getList(LineA.class);
