@@ -7,7 +7,7 @@ You can create any kind of instruction that suits your domain building your own 
 
 ![alt tag](https://user-images.githubusercontent.com/9370679/64796647-66327f80-d556-11e9-9694-dd26cac77ad8.png)
 
-The main reason behind this framework is to abstract this kind of structure
+The main reason behind this framework is to abstract this kind of structure:
 ```java
 
 Header header;
@@ -31,7 +31,7 @@ for (Object line : lines) {
     }
 }
 ```
-Into something like this
+Into something like this:
 ```java
 
 pipeline
@@ -56,7 +56,7 @@ pipeline
 
 ## Instruction
 
-Each instruction can handle data and can have it's data collected and state cleared.
+Each instruction can keep state to be collected and cleared later.
 
 ```java
 
@@ -86,31 +86,32 @@ public class Map extends Instruction {
 
 ## Typed instruction
 
-You can have an instruction that only handle a especific type
+You can have an instruction that only handle a especific type.
 
 ```java
-public class Join extends TypedInstruction<Record> {
+public class Store extends TypedInstruction<Record> {
 
-    private List<Record> elements = new ArrayList<>();
+    private Record record;
 
-    public Join(Class<Record> type) {
+    public Store(Class<Record> type) {
         super(type);
     }
 
     @Override
     protected void handleTyped(Record record) {
+        this.record = record;
         handleNext(record);
     }
 
     @Override
     public void collect(Data data) {
-        data.addAll(elements);
+        data.add(record);
         collectNext(data);
     }
 
     @Override
     public void clear() {
-        elements.clear();
+        record = null;
     }
 }
 
@@ -118,7 +119,7 @@ public class Join extends TypedInstruction<Record> {
 
 ## Pipeline
 
-The pipeline will try to collect data at every call to the handle method
+The pipeline will try to collect data at every call to the handle method.
 
 ```java
 
@@ -137,7 +138,6 @@ stream
 ```
 
 # Example
-
 Imagine you want to import a csv file containing products of every supermarket in the country.
 Each product can have different kinds of packaging.
 
@@ -148,7 +148,6 @@ Each product can have different kinds of packaging.
 - Pack
 
 **File example**
-
 ```csv
 header, 2019/01/01  
 supermarket, Wallmart  
@@ -163,7 +162,7 @@ pack, 1, $1.000,00
 ```
 **code**
 
-Assuming that each row has already been converted to a POJO, our code will look like this
+Assuming that each row has already been converted to a POJO, our code could look like this:
 
 ```java
 
@@ -183,4 +182,41 @@ pipeline
                 return new Data(convert(header, supermarket, product, packs));
             })
     )
+```
+
+The Join instruction will store the same type until it changes and pass on to the next instruction.
+```java
+public class Join extends TypedInstruction<Record> {
+
+    private List<Record> elements = new ArrayList<>();
+
+    public Join(Class<Record> type) {
+        super(type);
+    }
+
+    @Override
+    public void handle(Object object) {
+        if (!type.equals(object.getClass()) && !elements.isEmpty()) {
+            handleNext(object);
+        }        
+    }
+
+    @Override
+    protected void handleTyped(Record record) {
+        handleNext(record);
+    }
+
+    @Override
+    public void collect(Data data) {
+        data.addAll(elements);
+        clear();
+        collectNext(data);
+    }
+
+    @Override
+    public void clear() {
+        elements.clear();
+    }
+}
+
 ```
