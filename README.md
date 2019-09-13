@@ -160,7 +160,7 @@ supermarket, Target
 product, smartphone  
 pack, 1, $1.000,00  
 ```
-**code**
+**Code**
 
 Assuming that each row has already been converted to a POJO, our code could look like this:
 
