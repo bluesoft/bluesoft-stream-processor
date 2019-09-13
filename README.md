@@ -87,7 +87,7 @@ public class Map extends Instruction {
 }
 ```
 
-### Typed instruction
+## Typed instruction
 
 You can have an instruction that only handle a especific type
 
@@ -138,3 +138,5 @@ stream
     });
     
 ```
+
+# Example
