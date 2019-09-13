@@ -8,8 +8,8 @@ import br.com.bluesoft.streamprocessor.Data;
 
 public class Instructions {
 
-    public static Instruction collect(Function<Data, Data> mapper) {
-        return new Collect(mapper);
+    public static Instruction map(Function<Data, Data> mapper) {
+        return new Map(mapper);
     }
 
     public static Instruction chain(Instruction... instructions) {
