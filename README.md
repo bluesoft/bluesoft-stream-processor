@@ -148,8 +148,7 @@ Each product can have different kinds of packaging.
 - File header  
 - Supermarket  
 - Product  
-- Pack1  
-- Pack2  
+- Pack
 
 **File example**
 
