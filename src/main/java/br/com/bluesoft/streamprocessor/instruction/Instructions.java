@@ -19,6 +19,11 @@ public class Instructions {
     public static Instruction chain(List<? extends Instruction> instructions) {
         Instruction chain = instructions.get(0);
 
+        if(instructions.size() == 1) {
+            chain.setChain(chain);
+            return chain;
+        }
+
         instructions
             .stream()
             .peek(instruction -> instruction.setChain(chain))

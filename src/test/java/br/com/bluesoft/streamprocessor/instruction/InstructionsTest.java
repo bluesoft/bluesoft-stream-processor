@@ -3,11 +3,12 @@ package br.com.bluesoft.streamprocessor.instruction;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class InstructionsTest {
 
     @Test
-    public void criaChain() {
+    public void chain() {
         // Arranje
         InstructionStub firstInstruction = new InstructionStub();
         InstructionStub lasteInstruction = new InstructionStub();
@@ -21,5 +22,20 @@ public class InstructionsTest {
         assertEquals(chain, firstInstruction);
         assertEquals(object, firstInstruction.getHandleParam());
         assertEquals(object, lasteInstruction.getHandleParam());
+    }
+
+    @Test
+    public void chainSingleInstruction() {
+        // Arranje
+        InstructionStub instruction = new InstructionStub();
+        Instruction chain = Instructions.chain(instruction);
+
+        // Act
+
+        // Requeries the chain to clear all
+        chain.clearAll();
+
+        // Assert
+        assertTrue(instruction.isClear());
     }
 }
