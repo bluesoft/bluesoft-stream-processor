@@ -188,7 +188,7 @@ The Join instruction will store the same type until it changes and pass on to th
 ```java
 public class Join extends TypedInstruction<Record> {
 
-    private List<Record> elements = new ArrayList<>();
+    private List<Record> records = new ArrayList<>();
 
     public Join(Class<Record> type) {
         super(type);
@@ -203,12 +203,12 @@ public class Join extends TypedInstruction<Record> {
 
     @Override
     protected void handleTyped(Record record) {
-        handleNext(record);
+        records.add(record);
     }
 
     @Override
     public void collect(Data data) {
-        data.addAll(elements);
+        data.addAll(records);
         clear();
         collectNext(data);
     }
