@@ -6,7 +6,7 @@
 
     <groupId>br.com.bluesoft</groupId>
     <artifactId>bluesoft-stream-processor</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.9.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -27,8 +27,21 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus.releases</id>
+            <name>Internal Release Repository</name>
+            <url>http://nexus.bluesoft.com.br/content/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git@bitbucket.org:bluesoftbr/edi-parser.git</connection>
+        <developerConnection>scm:git:git@bitbucket.org:bluesoftbr/edi-parser.git</developerConnection>
+        <url>git@bitbucket.org:bluesoftbr/edi-parser.git</url>
+    </scm>
 
     <build>
         <plugins>
