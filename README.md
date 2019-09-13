@@ -140,3 +140,13 @@ stream
 ```
 
 # Example
+
+Imagine you want to import a file containing products of every supermarket in the country.
+Each product can have different kinds of packaging.
+
+Given the follow struct of the file
+File header
+Supermarket
+Product
+Pack1
+Pack2
