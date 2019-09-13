@@ -141,7 +141,7 @@ stream
 
 # Example
 
-Imagine you want to import a file containing products of every supermarket in the country.
+Imagine you want to import a csv file containing products of every supermarket in the country.
 Each product can have different kinds of packaging.
 
 **File Structure**
