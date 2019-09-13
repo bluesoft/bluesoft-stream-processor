@@ -150,3 +150,16 @@ Each product can have different kinds of packaging.
 - Product  
 - Pack1  
 - Pack2  
+
+**File example**
+
+header, 2019/01/01
+supermarket, Wallmart
+product, coke
+pack, 12, $10,00
+pack, 1, $1,00
+product, water
+pack, 12, $8,00
+supermarket, Target
+product, smartphone
+pack, 1, $1.000,00
