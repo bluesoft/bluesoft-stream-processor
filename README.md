@@ -195,13 +195,6 @@ public class Join extends TypedInstruction<Record> {
     }
 
     @Override
-    public void handle(Object object) {
-        if (!type.equals(object.getClass()) && !elements.isEmpty()) {
-            handleNext(object);
-        }        
-    }
-
-    @Override
     protected void handleTyped(Record record) {
         records.add(record);
     }
