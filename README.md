@@ -41,16 +41,13 @@ pipeline
             .groupBy(Block.class)
             .join(LineA.class)
             .join(LineB.class)
-            .when(LineB.class)
             .map(data -> {
                 Header header = data.get(Header.class);
                 Block block = data.get(Block.class);
                 List<LineA> as = data.getList(LineA.class);
                 LineB lineB data.get(LineB.class);
 
-                Object object = convert(header, block, as, lineB);
-
-                return new Data(object);
+                return new Data(convert(header, block, as, lineB));
             })
     )
 ```
@@ -163,4 +160,27 @@ pack, 12, $8,00
 supermarket, Target  
 product, smartphone  
 pack, 1, $1.000,00  
+```
+**code**
+
+Assuming that each row has already been converted to a POJO, our code will look like this
+
+```java
+
+pipeline
+    .pipe(
+        Instructions
+            .groupBy(Header.class)
+            .groupBy(Supermarket.class)
+            .join(Product.class)
+            .join(Pack.class)
+            .map(data -> {
+                Header header = data.get(Header.class);
+                Supermarket supermarket = data.get(Supermarket.class);
+                Product product data.get(Product.class);
+                List<Pack> packs = data.getList(Pack.class);
+
+                return new Data(convert(header, supermarket, product, packs));
+            })
+    )
 ```
