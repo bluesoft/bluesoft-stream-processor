@@ -145,6 +145,7 @@ Imagine you want to import a file containing products of every supermarket in th
 Each product can have different kinds of packaging.
 
 **File Structure**
+
 File header  
 Supermarket  
 Product  
