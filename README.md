@@ -237,7 +237,6 @@ public class GroupBy extends TypedInstruction<T> {
     @Override
     public void collect(Data data) {
         data.add(object);
-        object = null;
         collectNext(data);
     }
 
