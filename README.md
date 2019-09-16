@@ -186,22 +186,22 @@ pipeline
 
 The Join instruction will store the same type and pass on to the next instruction.
 ```java
-public class Join extends TypedInstruction<Record> {
+public class Join extends TypedInstruction<T> {
 
-    private List<Record> records = new ArrayList<>();
+    private List<T> objects = new ArrayList<>();
 
-    public Join(Class<Record> type) {
+    public Join(Class<T> type) {
         super(type);
     }
 
     @Override
-    protected void handleTyped(Record record) {
-        records.add(record);
+    protected void handleTyped(T object) {
+        objects.add(object);
     }
 
     @Override
     public void collect(Data data) {
-        data.addAll(records);
+        data.addAll(objects);
         clear();
         collectNext(data);
     }
@@ -209,6 +209,38 @@ public class Join extends TypedInstruction<Record> {
     @Override
     public void clear() {
         elements.clear();
+    }
+}
+
+```
+
+```java
+public class GroupBy extends TypedInstruction<T> {
+
+    private T object = new ArrayList<>();
+
+    public Join(Class<T> type) {
+        super(type);
+    }
+
+    @Override
+    protected void handleTyped(T object) {
+        if(object == null) {
+            this.object = object;
+        } else {
+            clearAll();
+        }
+    }
+
+    @Override
+    public void collect(Data data) {
+        data.add(object);
+        collectNext(data);
+    }
+
+    @Override
+    public void clear() {
+        object = null;
     }
 }
 
