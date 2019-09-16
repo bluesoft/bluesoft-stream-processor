@@ -225,7 +225,8 @@ public class GroupBy extends TypedInstruction<T> {
 
     @Override
     protected void handleTyped(T object) {
-        if(isNewGroup()) {       
+        if(isNewGroup()) {  
+            collecAll();
             clearAll();
         }
         
