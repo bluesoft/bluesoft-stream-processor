@@ -120,7 +120,7 @@ public class Store extends TypedInstruction<Record> {
 
 ## Pipeline
 
-The pipeline will try to collect data at every call to the handle method.
+The pipeline is the main component, it will try to collect data at every call to the handle method.
 
 ```java
 
