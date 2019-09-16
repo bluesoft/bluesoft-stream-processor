@@ -173,6 +173,7 @@ pipeline
             .groupBy(Supermarket.class)
             .join(Product.class)
             .join(Pack.class)
+            .end(Pack.class)
             .map(data -> {
                 Header header = data.get(Header.class);
                 Supermarket supermarket = data.get(Supermarket.class);
@@ -184,7 +185,7 @@ pipeline
     )
 ```
 
-The Join instruction will store the same type until it changes and pass on to the next instruction.
+The Join instruction will store the same type until and pass on to the next instruction.
 ```java
 public class Join extends TypedInstruction<Record> {
 
