@@ -228,7 +228,7 @@ public class GroupBy extends TypedInstruction<T> {
     protected void handleTyped(T object) {
         if(isNewGroup()) {  
             collecAll();
-            clearAll();
+            clearAllNext();
         }
         
         this.object = object;
@@ -242,6 +242,7 @@ public class GroupBy extends TypedInstruction<T> {
 
     @Override
     public void clear() {
+        this.object = null;
     }
     
     private boolean isNewGroup() {
