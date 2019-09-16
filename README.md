@@ -213,7 +213,7 @@ public class Join extends TypedInstruction<T> {
 
 ```
 
-The group by instruction will collect and clear the pipe at every change.
+The group by instruction will collect all data and clear the pipe at every change.
 ```java
 public class GroupBy extends TypedInstruction<T> {
 
