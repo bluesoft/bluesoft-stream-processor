@@ -56,7 +56,7 @@ pipeline
 
 ## Instruction
 
-Each instruction can keep state to be collected and cleared later.
+An instruction can keep state and that state can be collected and cleared later.
 
 ```java
 
@@ -86,7 +86,7 @@ public class Map extends Instruction {
 
 ## Typed instruction
 
-You can have an instruction that only handle a especific type.
+You can have an instruction that only handles a especific type.
 Other types will pass throught to next instruction.
 
 ```java
