@@ -56,7 +56,8 @@ pipeline
 
 ## Instruction
 
-An instruction can keep state and that state can be collected and cleared later.
+An instruction is the framework's building block, every instruction can keep state to be collected later and decide weather to pass data on to the next instruction.
+The state can be cleared by the instruction itself or throught the clearAll method issuing a clear call to all instructions on the same pipe.
 
 ```java
 
@@ -87,7 +88,7 @@ public class Map extends Instruction {
 ## Typed instruction
 
 You can have an instruction that only handles a especific type.
-Other types will pass throught to next instruction.
+By default typed instructions always pass data on to the next instruction.
 
 ```java
 public class Store extends TypedInstruction<Record> {
@@ -119,7 +120,7 @@ public class Store extends TypedInstruction<Record> {
 
 ## Pipeline
 
-The pipeline is the main component, it will try to collect data at every call to the handle method.
+The pipeline is the entry point, it will try to collect data at every call to the handle method.
 
 ```java
 
@@ -183,7 +184,7 @@ pipeline
     );
 ```
 
-The Join instruction will store the same type and pass on to the next instruction.
+The Join instruction will store data of the same type.
 ```java
 public class Join extends TypedInstruction<T> {
 
@@ -213,6 +214,7 @@ public class Join extends TypedInstruction<T> {
 
 ```
 
+The group by instruction will clear the pipe at every change.
 ```java
 public class GroupBy extends TypedInstruction<T> {
 
