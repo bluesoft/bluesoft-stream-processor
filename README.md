@@ -214,7 +214,7 @@ public class Join extends TypedInstruction<T> {
 
 ```
 
-The group by instruction will issue a collect all and clear all actions at every change.
+The group by instruction will issue a collect all and clear all next actions at every change.
 ```java
 public class GroupBy extends TypedInstruction<T> {
 
