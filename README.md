@@ -237,12 +237,12 @@ public class GroupBy extends TypedInstruction<T> {
     @Override
     public void collect(Data data) {
         data.add(object);
+        object = null;
         collectNext(data);
     }
 
     @Override
     public void clear() {
-        object = null;
     }
     
     private boolean isNewGroup() {
