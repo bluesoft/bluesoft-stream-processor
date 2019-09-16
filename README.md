@@ -87,6 +87,7 @@ public class Map extends Instruction {
 ## Typed instruction
 
 You can have an instruction that only handle a especific type.
+Other types will pass throught to next instruction.
 
 ```java
 public class Store extends TypedInstruction<Record> {
@@ -149,16 +150,16 @@ Each product can have different kinds of packaging.
 
 **File example**
 ```csv
-header, 2019/01/01  
-supermarket, Wallmart  
-product, coke  
-pack, 12, $10,00  
-pack, 1, $1,00  
-product, water  
-pack, 12, $8,00  
-supermarket, Target  
-product, smartphone  
-pack, 1, $1.000,00  
+header; 2019/01/01  
+supermarket; Wallmart  
+product; coke  
+pack; 12; $10,00  
+pack; 1; $1,00  
+product; water  
+pack; 12; $8,00  
+supermarket; Target  
+product; smartphone  
+pack; 1; $1.000,00  
 ```
 **Code**
 
@@ -173,7 +174,7 @@ pipeline
             .groupBy(Supermarket.class)
             .join(Product.class)
             .join(Pack.class)
-            .untilChange(Pack.class)
+            .utilChange(Pack.class)
             .map(data -> {
                 Header header = data.get(Header.class);
                 Supermarket supermarket = data.get(Supermarket.class);
@@ -185,7 +186,7 @@ pipeline
     )
 ```
 
-The Join instruction will store the same type until and pass on to the next instruction.
+The Join instruction will store the same type and pass on to the next instruction.
 ```java
 public class Join extends TypedInstruction<Record> {
 
