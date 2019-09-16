@@ -184,7 +184,7 @@ pipeline
     );
 ```
 
-The Join instruction will store data of the same type.
+The Join instruction will store data of the same type and clear itself on collect.
 ```java
 public class Join extends TypedInstruction<T> {
 
