@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -65,6 +66,27 @@ public class InstructionTest {
         assertTrue(firstInstruction.isClear());
         assertTrue(lastInstruction.isClear());
     }
+
+    @Test
+    public void clearAllNext() {
+        // Arranje
+        InstructionStub lastInstruction = new InstructionStub();
+
+        InstructionStub middleInstruction = new InstructionStub();
+        middleInstruction.setNext(lastInstruction);
+
+        InstructionStub firstInstruction = new InstructionStub();
+        firstInstruction.setNext(middleInstruction);
+
+        // Act
+        firstInstruction.clearAllNext();
+
+        // Assert
+        assertFalse(firstInstruction.isClear());
+        assertTrue(middleInstruction.isClear());
+        assertTrue(lastInstruction.isClear());
+    }
+
 
     @Test
     public void onCollectAllValidateIfInstructionHasReferenceToTheChain() {

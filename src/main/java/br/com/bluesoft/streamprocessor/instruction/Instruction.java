@@ -22,18 +22,28 @@ public abstract class Instruction {
         chain.collect(new Data());
     }
 
+
     protected void clearAll() {
         requireChain();
-        chain.clearChain();
+        clearAll(chain);
+    }
+
+    protected void clearAllNext() {
+        getNext().ifPresent(this::clearAllNext);
     }
 
     protected void collectNext(Data data) {
         getNext().ifPresent(instruction -> instruction.collect(data));
     }
 
-    private void clearChain() {
-        clear();
-        getNext().ifPresent(Instruction::clearChain);
+    private void clearAll(Instruction instruction) {
+        instruction.clear();
+        instruction.getNext().ifPresent(this::clearAll);
+    }
+
+    private void clearAllNext(Instruction instruction) {
+        instruction.clear();
+        instruction.clearAllNext();
     }
 
     private Optional<Instruction> getNext() {
