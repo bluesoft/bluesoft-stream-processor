@@ -139,8 +139,7 @@ stream
 ```
 
 # Example
-Imagine you want to import a csv file containing products of every supermarket in the country.
-Each product can have different kinds of packaging.
+Imagine you want to import a csv file containing products of every supermarket in the country which can have different kinds of packaging.
 
 **File Structure**
 - File header  
