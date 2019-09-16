@@ -173,7 +173,7 @@ pipeline
             .groupBy(Supermarket.class)
             .join(Product.class)
             .join(Pack.class)
-            .end(Pack.class)
+            .untilChange(Pack.class)
             .map(data -> {
                 Header header = data.get(Header.class);
                 Supermarket supermarket = data.get(Supermarket.class);
