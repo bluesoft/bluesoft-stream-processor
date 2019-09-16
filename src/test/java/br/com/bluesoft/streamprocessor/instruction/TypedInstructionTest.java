@@ -23,12 +23,12 @@ public class TypedInstructionTest {
     }
 
     @Test
-    public void passOnNotExpectedType() {
+    public void allwaysPassOnToNextInstruction() {
         // Arranje
         TypedInstructionStub instruction = new TypedInstructionStub(String.class);
 
         // Act
-        instruction.handle(new Object());
+        instruction.handle("");
 
         // Assert
         assertNotNull(instruction.getHandleNextParam());
