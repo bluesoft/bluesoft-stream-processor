@@ -101,7 +101,6 @@ public class Store extends TypedInstruction<Record> {
     @Override
     protected void handleTyped(Record record) {
         this.record = record;
-        handleNext(record);
     }
 
     @Override
@@ -126,7 +125,7 @@ The pipeline is the main component, it will try to collect data at every call to
 
 Pipeline pipeline = new Pipeline()
     .pipe(instructions)
-    .pipe(instructions);
+    .pipe(instructions2);
 
 stream
     .flatMap(o -> {
