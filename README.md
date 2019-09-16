@@ -225,11 +225,11 @@ public class GroupBy extends TypedInstruction<T> {
 
     @Override
     protected void handleTyped(T object) {
-        if(object == null) {
-            this.object = object;
-        } else {
+        if(isNewGroup()) {       
             clearAll();
         }
+        
+        this.object = object;
     }
 
     @Override
@@ -241,6 +241,10 @@ public class GroupBy extends TypedInstruction<T> {
     @Override
     public void clear() {
         object = null;
+    }
+    
+    private boolean isNewGroup() {
+        return this.object != null
     }
 }
 
