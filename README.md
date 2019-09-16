@@ -168,20 +168,19 @@ Assuming that each row has already been converted to a POJO, our code could look
 
 pipeline
     .pipe(
-        Instructions
-            .groupBy(Header.class)
-            .groupBy(Supermarket.class)
-            .groupBy(Product.class)
-            .join(Pack.class)
-            .map(data -> {
-                Header header = data.get(Header.class);
-                Supermarket supermarket = data.get(Supermarket.class);
-                Product product data.get(Product.class);
-                List<Pack> packs = data.getList(Pack.class);
+        new GroupBy<>(Header.class),
+        new GroupBy<>(Supermarket.class),
+        new GroupBy<>(Product.class),
+        new Join<>(Pack.class),
+        new Map(data -> {
+            Header header = data.get(Header.class);
+            Supermarket supermarket = data.get(Supermarket.class);
+            Product product data.get(Product.class);
+            List<Pack> packs = data.getList(Pack.class);
 
-                return new Data(convert(header, supermarket, product, packs));
-            })
-    )
+            return new Data(convert(header, supermarket, product, packs));
+        })
+    );
 ```
 
 The Join instruction will store the same type and pass on to the next instruction.
