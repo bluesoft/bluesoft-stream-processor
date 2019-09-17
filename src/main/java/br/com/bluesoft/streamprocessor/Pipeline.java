@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import br.com.bluesoft.streamprocessor.instruction.Instruction;
-import br.com.bluesoft.streamprocessor.instruction.Instructions;
 
 public class Pipeline {
 
@@ -61,7 +60,7 @@ public class Pipeline {
         private Instruction instruction;
 
         public Pipe(Instruction... instructions) {
-            this.instruction = Instructions.chain(instructions);
+            this.instruction = Instruction.chain(instructions);
         }
 
         @Override
