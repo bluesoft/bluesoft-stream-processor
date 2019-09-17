@@ -4,7 +4,7 @@
 
     <groupId>br.com.bluesoft</groupId>
     <artifactId>bluesoft-stream-processor</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -36,11 +36,11 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git@bitbucket.org:bluesoftbr/edi-parser.git</connection>
-        <developerConnection>scm:git:git@bitbucket.org:bluesoftbr/edi-parser.git</developerConnection>
-        <url>git@bitbucket.org:bluesoftbr/edi-parser.git</url>
-      <tag>bluesoft-stream-processor-1.0.0</tag>
-  </scm>
+        <connection>scm:git:https://github.com/bluesoft/bluesoft-stream-processor.git</connection>
+        <developerConnection>scm:git:https://github.com/bluesoft/bluesoft-stream-processor.git</developerConnection>
+        <url>git:https://github.com/bluesoft/bluesoft-stream-processor.git</url>
+        <tag>bluesoft-stream-processor-1.0.0</tag>
+    </scm>
 
     <build>
         <plugins>
