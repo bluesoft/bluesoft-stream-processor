@@ -9,20 +9,20 @@ import br.com.bluesoft.streamprocessor.Data;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MapTest {
+public class MapAllTest {
 
     @Test
     public void handleNext() {
         // Arranje
         InstructionStub nextInstruction = new InstructionStub();
 
-        Map map = new Map(data -> data);
-        map.setNext(nextInstruction);
+        MapAll mapAll = new MapAll(data -> data);
+        mapAll.setNext(nextInstruction);
 
         Object object = new Object();
 
         // Act
-        map.handle(object);
+        mapAll.handle(object);
 
         // Assert
         assertEquals(object, nextInstruction.getHandleParam());
@@ -33,13 +33,13 @@ public class MapTest {
         // Arranje
         InstructionStub nextInstruction = new InstructionStub();
 
-        Map map = new Map(data -> data);
-        map.setNext(nextInstruction);
+        MapAll mapAll = new MapAll(data -> data);
+        mapAll.setNext(nextInstruction);
 
         Data data = new Data();
 
         // Act
-        map.collect(data);
+        mapAll.collect(data);
 
         // Assert
         assertEquals(data, nextInstruction.getCollectParam());
@@ -49,13 +49,13 @@ public class MapTest {
     public void mapOnCollect() {
         // Arranje
         AtomicBoolean collected = new AtomicBoolean();
-        Map map = new Map(d -> {
+        MapAll mapAll = new MapAll(d -> {
             collected.set(true);
             return d;
         });
 
         // Act
-        map.collect(new Data());
+        mapAll.collect(new Data());
 
         // Assert
         assertTrue(collected.get());

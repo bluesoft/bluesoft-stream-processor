@@ -4,11 +4,11 @@ import java.util.function.Function;
 
 import br.com.bluesoft.streamprocessor.Data;
 
-public class Map extends Instruction {
+public class MapAll extends Instruction {
 
     private Function<Data, Data> mapper;
 
-    public Map(Function<Data, Data> mapper) {
+    public MapAll(Function<Data, Data> mapper) {
         this.mapper = mapper;
     }
 
