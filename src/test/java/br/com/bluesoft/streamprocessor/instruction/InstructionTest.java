@@ -15,6 +15,38 @@ public class InstructionTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @Test
+    public void chain() {
+        // Arranje
+        InstructionStub firstInstruction = new InstructionStub();
+        InstructionStub lasteInstruction = new InstructionStub();
+        Object object = new Object();
+
+        // Act
+        Instruction chain = Instruction.chain(firstInstruction, lasteInstruction);
+        chain.handle(object);
+
+        // Assert
+        assertEquals(chain, firstInstruction);
+        assertEquals(object, firstInstruction.getHandleParam());
+        assertEquals(object, lasteInstruction.getHandleParam());
+    }
+
+    @Test
+    public void chainSingleInstruction() {
+        // Arranje
+        InstructionStub instruction = new InstructionStub();
+        Instruction chain = Instruction.chain(instruction);
+
+        // Act
+
+        // Requeries the chain to clear all
+        chain.clearAll();
+
+        // Assert
+        assertTrue(instruction.isClear());
+    }
+
+    @Test
     public void handleObjectOnNextInstruction() {
         // Arranje
         Long registro = 1L;
