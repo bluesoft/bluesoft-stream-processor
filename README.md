@@ -42,7 +42,7 @@ pipeline
             .join(LineA.class)
             .join(LineB.class)
             .when(LineB.class)
-            .map(data -> {
+            .mapAll(data -> {
                 Header header = data.get(Header.class);
                 Block block = data.get(Block.class);
                 List<LineA> as = data.getList(LineA.class);
@@ -173,7 +173,7 @@ pipeline
         new GroupBy<>(Supermarket.class),
         new GroupBy<>(Product.class),
         new Join<>(Pack.class),
-        new Map(data -> {
+        new MapAll(data -> {
             Header header = data.get(Header.class);
             Supermarket supermarket = data.get(Supermarket.class);
             Product product data.get(Product.class);
