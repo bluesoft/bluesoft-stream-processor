@@ -176,7 +176,7 @@ pipeline
         new GroupBy<>(Supermarket.class),
         new GroupBy<>(Product.class),
         new Join<>(Pack.class),
-        new End(Trailer.class)
+        new End<>(Trailer.class)
         new MapAll(data -> {
             Header header = data.get(Header.class);
             Supermarket supermarket = data.get(Supermarket.class);
@@ -258,7 +258,7 @@ public class GroupBy extends TypedInstruction<T> {
 
 **End** will make all data be collected and the pipe be cleared.
 ```java
-public class End extends TypedInstruction<T> {
+public class End<T> extends TypedInstruction<T> {
 
     public End(Class<T> type) {
         super(type);
