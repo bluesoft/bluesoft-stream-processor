@@ -222,7 +222,7 @@ public class Join<T> extends TypedInstruction<T> {
 ```java
 public class GroupBy<T> extends TypedInstruction<T> {
 
-    private T object = new ArrayList<>();
+    private T object;
 
     public GroupBy(Class<T> type) {
         super(type);
