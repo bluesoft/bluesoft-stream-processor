@@ -190,7 +190,7 @@ pipeline
 
 **Join** will store data of especified type.
 ```java
-public class Join extends TypedInstruction<T> {
+public class Join<T> extends TypedInstruction<T> {
 
     private List<T> objects = new ArrayList<>();
 
@@ -220,7 +220,7 @@ public class Join extends TypedInstruction<T> {
 
 **GroupBy** will make all data be collected and the next instructions be cleared at every change.
 ```java
-public class GroupBy extends TypedInstruction<T> {
+public class GroupBy<T> extends TypedInstruction<T> {
 
     private T object = new ArrayList<>();
 
