@@ -58,7 +58,7 @@ pipeline
 ## Instruction
 
 An instruction is the framework's building block, every instruction can keep state to be collected later and decide weather to pass data on to the next instruction.
-The state can be cleared by the instruction itself or throught the clearAll method issuing a clear call to all instructions on the same pipe.
+The state can be cleared by the instruction itself or throught the clear method called by the chain.
 
 ```java
 
@@ -89,7 +89,7 @@ public class Map extends Instruction {
 ## Typed instruction
 
 You can have an instruction that only handles a especific type.
-By default typed instructions always pass data on to the next instruction.
+By default typed instructions will pass on data of diferent type.
 
 ```java
 public class Store extends TypedInstruction<Record> {
@@ -147,6 +147,7 @@ Imagine you want to import a csv file containing products of every supermarket i
 - Supermarket  
 - Product  
 - Pack
+- Trailer
 
 **File example**
 ```csv
@@ -160,19 +161,22 @@ pack; 12; $8,00
 supermarket; Target  
 product; smartphone  
 pack; 1; $1.000,00  
+trailer;
 ```
-**Code**
+### Code ###
 
-Assuming that each row has already been converted to a POJO, our code could look like this:
+Assuming that each row has already been converted to a POJO, our code could look like the one below.
+The data will be grouped by header, supermarket and product. Everytime a group changes or we reach the trailer the data is collected.
 
 ```java
 
 pipeline
-    .pipe(
+    .pipe(        
         new GroupBy<>(Header.class),
         new GroupBy<>(Supermarket.class),
         new GroupBy<>(Product.class),
         new Join<>(Pack.class),
+        new End(Trailer.class)
         new MapAll(data -> {
             Header header = data.get(Header.class);
             Supermarket supermarket = data.get(Supermarket.class);
@@ -184,7 +188,7 @@ pipeline
     );
 ```
 
-The Join instruction will store data of the same type and clear itself on collect.
+**Join** will store data of especified type.
 ```java
 public class Join extends TypedInstruction<T> {
 
@@ -214,13 +218,13 @@ public class Join extends TypedInstruction<T> {
 
 ```
 
-The group by instruction will issue a collect all and clear all next actions at every change.
+**GroupBy** will make all data be collected and the next instructions be cleared at every change.
 ```java
 public class GroupBy extends TypedInstruction<T> {
 
     private T object = new ArrayList<>();
 
-    public Join(Class<T> type) {
+    public GroupBy(Class<T> type) {
         super(type);
     }
 
@@ -247,6 +251,32 @@ public class GroupBy extends TypedInstruction<T> {
     
     private boolean isNewGroup() {
         return this.object != null
+    }
+}
+
+```
+
+**End** will make all data be collected and the pipe be cleared.
+```java
+public class End extends TypedInstruction<T> {
+
+    public End(Class<T> type) {
+        super(type);
+    }
+
+    @Override
+    protected void handleTyped(T object) {
+        collecAll();
+        clearAll();
+    }
+
+    @Override
+    public void collect(Data data) {
+        collectNext(data);
+    }
+
+    @Override
+    public void clear() {
     }
 }
 
